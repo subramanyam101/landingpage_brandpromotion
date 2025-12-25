@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Title from "./Title";
 import assets from "../assets/assets.js";
 import toast from "react-hot-toast";
+import { motion } from "motion/react";
 
 const ContactUs = () => {
   const [result, setResult] = useState("");
@@ -10,7 +11,7 @@ const ContactUs = () => {
   const onSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
-    formData.append("access_key",  import.meta.env.VITE_WEB3FORMS_ACCESS_KEY);
+    formData.append("access_key", import.meta.env.VITE_WEB3FORMS_ACCESS_KEY);
 
     try {
       const response = await fetch("https://api.web3forms.com/submit", {
@@ -19,7 +20,7 @@ const ContactUs = () => {
       });
 
       const data = await response.json();
-         if (data.success) {
+      if (data.success) {
         toast.success("Submited Successfully");
         event.target.reset();
       } else {
@@ -31,7 +32,11 @@ const ContactUs = () => {
   };
 
   return (
-    <div
+    <motion.div
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true }}
+      transition={{ staggerChildren: 0.2 }}
       id="contact-us"
       className="flex flex-col items-center gap-7 px-4 sm:px-12 lg:px-24 xl:px-40 pt-30 text-gray-700 dark:text-white"
     >
@@ -39,7 +44,11 @@ const ContactUs = () => {
         title="Reach out to us"
         description="We would love to hear from you! Fill out the form or reach us via email or phone."
       />
-      <form
+      <motion.form
+       initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.4 }}
+        viewport={{ once: true }}
         onSubmit={onSubmit}
         className="grid sm:grid-cols-2 gap-3 sm:gap-5 max-w-2xl w-full"
       >
@@ -89,8 +98,8 @@ const ContactUs = () => {
           Send Message{" "}
           <img src={assets.arrow_icon} alt="submit button" className="w-4" />
         </button>
-      </form>
-    </div>
+      </motion.form>
+    </motion.div>
   );
 };
 

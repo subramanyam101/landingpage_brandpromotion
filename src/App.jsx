@@ -63,7 +63,7 @@ const App = () => {
       <div
         ref={outlineRef}
         className="fixed top-0 left-0 h-10 w-10 rounded-full border border-primary pointer-events-none z-9999"
-      ></div>
+      style={{transition:"transform 0.1s ease-out"}}></div>
       {/* custom cursor dot here  */}
       <div
         ref={dotRef}

@@ -1,13 +1,21 @@
+/* eslint-disable no-unused-vars */
+
 import React, { useState } from "react";
 import assets from "../assets/assets";
 import ThemeToogleButton from "./ThemeToogleButton";
+import { easeOut, motion } from "motion/react";
 
 const Navbar = ({ theme, setTheme }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const whatsappNumber = import.meta.env.VITE_WHATSAPP_NUMBER;
 
   return (
-    <div className="flex justify-between items-center px-4 sm:px-12 lg:px-24 xl:px-40 py-4 sticky top-0 z-20 backdrop-blur-xl font-medium bg-white/50 dark:bg-gray-900/70">
+       <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1,ease:easeOut }}
+      className="flex justify-between items-center px-4 sm:px-12 lg:px-24 xl:px-40 py-4 sticky top-0 z-20 backdrop-blur-xl font-medium bg-white/50 dark:bg-gray-900/70"
+    >
       {/* <img
         src={theme === "dark" ? assets.logo_dark : assets.logo}
         alt="logo"
@@ -147,7 +155,7 @@ const Navbar = ({ theme, setTheme }) => {
           <img src={assets.arrow_icon} width={14} alt="connect button" />
         </a>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
